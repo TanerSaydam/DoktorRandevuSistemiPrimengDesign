@@ -1,0 +1,16 @@
+<div style="display: flex; gap: 20px;">
+    <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">
+            <i class="pi pi-user"></i>
+        </span>
+        <input [(ngModel)]="name" pInputText placeholder="Name" />
+    </div>
+    <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">
+            <i class="pi pi-user"></i>
+        </span>
+        <input [(ngModel)]="lastName" pInputText placeholder="Lastname" />
+    </div>
+</div>
+
+<p-button (click)="save()" label="Ekle" [style]="{marginTop: '10px', width: '100%'}" severity="success" icon="pi pi-plus"></p-button>
