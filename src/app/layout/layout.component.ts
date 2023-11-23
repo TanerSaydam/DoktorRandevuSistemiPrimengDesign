@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MenubarModule } from 'primeng/menubar';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-layout',
   standalone: true,
@@ -16,10 +18,37 @@ export class LayoutComponent {
       label: 'Home',
       icon: 'pi pi-fw pi-home',
       routerLink: "/"
-    },
-    {
-      label: 'Quit',
-      icon: 'pi pi-fw pi-power-off'
     }
   ];
+
+  constructor(
+    private auth: AuthService,
+    private router: Router
+  ){
+    if(auth.checkIsAuthenticated()){
+      this.items.push({
+        label: 'Giriş Yap',
+        icon: 'pi pi-sign-in',
+        routerLink: "/sign-in"
+      })
+    }else{
+      this.items.push({
+        label: 'Doktorlar',
+        icon: 'pi pi-power-off',
+        routerLink: "/doctors"
+      })
+      this.items.push({
+        label: 'Çıkış Yap',
+        icon: 'pi pi-power-off',
+        command: (event)=> {
+          this.signOut(event);
+        }
+      })
+    }
+  }
+
+  signOut(event: MenuItemCommandEvent){
+    localStorage.clear();
+    this.router.navigateByUrl("/sign-in");
+  }
 }

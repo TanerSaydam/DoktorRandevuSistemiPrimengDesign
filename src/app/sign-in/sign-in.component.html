@@ -1,0 +1,18 @@
+<div class="card" style="display: flex; justify-content: center; height: 95vh; align-items: center;">
+    <p-card header="Giriş Sayfası" subheader="Giriş yapmak için bilgilerinizi doldurun" [style]="{ width: '360px' }">
+        <ng-template pTemplate="header">
+            <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png" />
+        </ng-template>
+        <div class="form-group">
+            <label for="userNameOrEmail">Mail ya da Kullanıcı Adı</label>
+            <input type="text" class="ng-invalid ng-dirty" pInputText style="width: 100%;" placeholder="jhondoe">
+        </div>
+        <div class="form-group mt-2 password-field">
+            <label for="password">Şifre</label>
+            <p-password [(ngModel)]="password" [toggleMask]="true" [inputStyle]="{ width: '325px' }"></p-password>
+        </div>
+        <ng-template pTemplate="footer">
+            <p-button routerLink="/" label="Giriş Yap" icon="pi pi-fw pi-sign-in" [style]="{ width: '100%' }"></p-button>
+        </ng-template>
+    </p-card>
+</div>

@@ -1,0 +1,73 @@
+
+<div class="card">
+    <p-toast></p-toast>
+    <p-table
+        #dt
+        [value]="products"
+        [rows]="10"
+        [paginator]="true"
+        [globalFilterFields]="['name']"
+        [tableStyle]="{padding: '0'}"
+        [rowHover]="true"
+        dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+    >
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <button pButton pRipple label="Doktor Ekle" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" placeholder="Search..." />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Resmi</th>
+                <th pSortableColumn="name" style="min-width:15rem">Doktor Adı <p-sortIcon field="name"></p-sortIcon></th>
+                <th>Bölümü</th>
+                <th>İşlemler</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>
+                    <img [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image"/>
+                </td>
+                <td>{{ product.name }}</td>
+                <td>Kardiyoloji</td>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+
+<p-dialog [(visible)]="productDialog" [style]="{ width: '450px' }" header="Product Details" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="field ">
+            <label htmlFor="username">Username</label>
+            <input pInputText id="username" aria-describedby="username-help" />
+        </div>
+        <div class="field mt-2">
+            <label htmlFor="username">Username</label>
+            <input type="text" pInputText id="name" [(ngModel)]="product.name" required autofocus />
+            <small class="p-error" *ngIf="submitted && !product.name">Name is required.</small>
+        </div>
+        <div class="field mt-2">
+            <label htmlFor="username">Username</label>
+            <textarea id="description" pInputTextarea [(ngModel)]="product.description" required rows="3" cols="20"></textarea>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

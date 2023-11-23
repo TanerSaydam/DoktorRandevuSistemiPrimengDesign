@@ -1,3 +1,4 @@
+
 <div style="display: flex; gap: 20px;">
     <div class="p-inputgroup">
         <span class="p-inputgroup-addon">
@@ -12,5 +13,7 @@
         <input [(ngModel)]="lastName" pInputText placeholder="Lastname" />
     </div>
 </div>
+
+<p-organizationChart [value]="data"></p-organizationChart>
 
 <p-button (click)="save()" label="Ekle" [style]="{marginTop: '10px', width: '100%'}" severity="success" icon="pi pi-plus"></p-button>

@@ -56,6 +56,8 @@ export class HomeComponent {
   ]
 
   constructor(){
+    console.log("Ana Sayfa Çalıştı");
+    
     setTimeout(()=> {
       this.isloaded = true;
     },1000)

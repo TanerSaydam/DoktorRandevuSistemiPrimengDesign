@@ -56,17 +56,20 @@ export class AppointmentComponent {
         }
       }
     }
+
+    console.log("Appointment Çalıştı");
   }
 
   cloneDays() {
     return this.days.map(d => ({ ...d, patients: [] }));
   }
 
-  createAppointment(hour: string, day: string) {
+  createAppointment(hour: string, day: string, date: string) {
     this.ref = this.dialogService.open(CreateAppointmentComponent, {
       data: {
         hour: hour,
-        day: day
+        day: day,
+        date: date
       },
       header: 'Randevu Ekle',
       width: '30%',
